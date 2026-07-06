@@ -6,7 +6,8 @@ import { notFound } from "next/navigation";
 export const dynamic = "force-dynamic";
 
 export default async function ProductDetailPage({ params }) {
-  const product = await getProductBySlug(params.slug);
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
 
   const related = await getRelatedProducts(product);

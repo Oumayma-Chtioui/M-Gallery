@@ -6,12 +6,13 @@ import Link from "next/link";
 export const dynamic = "force-dynamic";
 
 export default async function ProductsPage({ searchParams }) {
+  const resolvedSearchParams = await searchParams;
   const [products, categories] = await Promise.all([
     getProducts(),
     getCategories(),
   ]);
 
-  const activeCategory = searchParams?.category;
+  const activeCategory = resolvedSearchParams?.category;
   const filtered = activeCategory
     ? products.filter((p) => p.category === activeCategory)
     : products;
